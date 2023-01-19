@@ -6,6 +6,8 @@ We open the terminal and write `node` there to open **node**. This will open up 
 
 We write **Tab** 2 times on the terminal and the terminal lists all the global variables that are available in Node. We can write to the console one of these variables and by hitting **Tab** 2 times again, we can list all the methods or the properties that are available to us.
 
+---
+
 ## 7. Running JavaScript Outside the Browser
 
 ### Hello World!
@@ -52,7 +54,11 @@ So again, calling this function here with this built-in `fs` module name will re
 
 **Note:** We import the modules at the top of our files.
 
+---
+
 ## 8. Reading and Writing Files
+
+### Reading Files
 
 We use `fs` variable to use the functions on that object. In this example we use `readFileSync` function:
 
@@ -60,4 +66,28 @@ We use `fs` variable to use the functions on that object. In this example we use
 fs.readFileSync();
 ```
 
-`readFileSync` function takes 2 arguements. The first one `path` <string>, and the second part `options` <object>:
+`readFileSync` function takes 2 arguements. The first one is `path` (`string`) and the second one is `options` (`object`) or `encoding` (`string`):
+
+```javascript
+fs.readFileSync('./txt/input.txt', 'utf-8');
+```
+
+We will take the content in **input.txt** here but if we didn't define the encoding, we would have received a `Buffer` and we don't want that.
+
+### Writing Files
+
+In this example we use `writeFileSync` function:
+
+```javascript
+fs.writeFileSync();
+```
+
+`writeFileSync` function takes 3 arguements. The first one is `path` (`string`), the second one is `data` (`string`) and the third one is `options` (`object`) or `encoding` (`string`):
+
+```javascript
+fs.writeFileSync('./txt/output.txt', textOut, 'utf-8');
+```
+
+**Note:** This function doesn't return anything meaningful and we don't save anything to any variable.
+
+---
