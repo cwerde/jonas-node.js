@@ -91,3 +91,41 @@ fs.writeFileSync('./txt/output.txt', textOut, 'utf-8');
 **Note:** This function doesn't return anything meaningful and we don't save anything to any variable.
 
 ---
+
+## 10. Reading and Writing Files Asynchronously
+
+### Reading
+
+We use `readFile` function to read the files asyncronously. It takes 3 arguements. The first one is `path` (`string`), the second one is `options` (`object`) or `encoding` (`string`) and the third one is a `callback` (`function`):
+
+```javascript
+fs.readFile('./txt/start.txt', 'utf-8', () => {});
+```
+
+The third arguement `callback` takes 2 arguements. The first one is `error` (`error`) and the second one is `data` (`string`):
+
+```javascript
+fs.readFile('./txt/start.txt', 'utf-8', (error, data) => {});
+```
+
+When we write codes this block, they will run after the file is read.
+
+### Writing
+
+We use `writeFile` function to read the files asyncronously. It takes 4 arguements. The first one is `path` (`string`), the second one is `data` (`string`), the third one is `options` (`object`) or `encoding` (`string`) and the fourth one is a `callback` (`function`):
+
+```javascript
+fs.writeFile('./txt/final.txt', data, 'utf-8', () => {});
+```
+
+If we are writing a basic example, the fourth arguement `callback` probably takes 1 arguement and this arguement is `error` (`error`):
+
+```javascript
+fs.writeFile('./txt/final.txt', data, 'utf-8', (err) => {});
+```
+
+If we don't handle the error, we don't have to write anything between the curly braces.
+
+---
+
+## 11. Creating a Simple Web Server
