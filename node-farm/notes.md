@@ -129,3 +129,51 @@ If we don't handle the error, we don't have to write anything between the curly 
 ---
 
 ## 11. Creating a Simple Web Server
+
+We use our `http` module and a `method` that is on that `object`.
+
+```javascript
+http.createServer();
+```
+
+`createServer` function will accept a `callback` function and this callback will accept 2 fundamental variables. They are the `request` variable and the `response` variable.
+
+```javascript
+http.createServer((request, response) => {});
+```
+
+Each time that a new request hits our server this callback function will get called, and the callback function will have access to the `request` object which holds all kinds of stuff like the request url, and a bunch of other stuff. On the other hand, the `response` object gives us a lot of tools basically for dealing with the `response`, so for sending out the `response`. All we want to do now is just a basic response and we do that with `end` method on `response` object:
+
+```javascript
+http.createServer((req, res) => {
+  res.end('Hello from the server!');
+});
+```
+
+Creating a server was the first part, and the second part is to actually listen to incoming requests from the client. In order to do that, we should save the result of `createServer` to a new variable.
+
+```javascript
+const server = http.createServer((req, res) => {
+  res.end('Hello from the server!');
+});
+```
+
+After that, we use `listen` method on this object.
+
+```javascript
+server.listen();
+```
+
+And this method accepts 3 parameters. The first one is the `port` (`int`), the second one is the `host` (`string`) and the third one is a `callback`. We don't need to specify the second and the third ones.
+
+```javascript
+server.listen(8000, '127.0.0.1', () => {
+  console.log('Listening to requests on port 8000');
+});
+```
+
+And now, all we have to do is to actually go to this url on our computer on port 8000. We have to run the Node application and then we can write on url bar `127.0.0.1:8000`.
+
+---
+
+## 12. Routing
