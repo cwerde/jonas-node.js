@@ -177,3 +177,29 @@ And now, all we have to do is to actually go to this url on our computer on port
 ---
 
 ## 12. Routing
+
+The first steb is to be able to analyze the URL and for that we use `url` built-in module.
+
+```javascript
+const url = require('url');
+```
+
+We won't use the module in this lecture. We will use the `url` (`string`) on `req` (`object`):
+
+```javascript
+const pathName = req.url;
+```
+
+We will use an if-else statement:
+
+```javascript
+if (pathName === '/' || pathName === '/overview') {
+  res.writeHead(200, { 'Content-type': 'text/html' });
+
+  res.end(
+    `<h1 style="font-family: 'Amazon Ember', sans-serif;">This is the OVERVIEW!</h1>`
+  );
+}
+```
+
+We use `writeHead` function on `res` object to write headers. This function accepts 2 paratemers. The first one is the `status code` (`int`) and the second one is `headers` (`object`).

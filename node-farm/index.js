@@ -1,5 +1,6 @@
 const fs = require('fs');
 const http = require('http');
+const url = require('url');
 const { type } = require('os');
 
 //------------------------------//
@@ -48,8 +49,32 @@ console.log('The file will be read!');
 //------------------------------//
 
 const server = http.createServer((req, res) => {
-  console.log(req);
-  res.end('Hello from the server!');
+  const pathName = req.url;
+
+  console.log(typeof req.url);
+
+  if (pathName === '/' || pathName === '/overview') {
+    res.writeHead(200, { 'Content-type': 'text/html' });
+
+    res.end(
+      `<p style="font-family: 'Amazon Ember', sans-serif;">This is the OVERVIEW!</p>`
+    );
+  } else if (pathName === '/product') {
+    res.writeHead(200, { 'Content-type': 'text/html' });
+
+    res.end(
+      `<p style="font-family: 'Amazon Ember', sans-serif;">This is the PRODUCT!</p>`
+    );
+  } else {
+    res.writeHead(404, {
+      'Content-type': 'text/html',
+      'my-own-header': 'hello-world',
+    });
+
+    res.end(
+      `<p style="font-family: 'Amazon Ember', sans-serif;">404 PAGE NOT FOUND!</p>`
+    );
+  }
 });
 
 server.listen(8000, '127.0.0.1', () => {
