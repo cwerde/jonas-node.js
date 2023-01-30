@@ -203,3 +203,7 @@ if (pathName === '/' || pathName === '/overview') {
 ```
 
 We use `writeHead` function on `res` object to write headers. This function accepts 2 paratemers. The first one is the `status code` (`int`) and the second one is `headers` (`object`).
+
+---
+
+## 13. Building a (Very) Simple API

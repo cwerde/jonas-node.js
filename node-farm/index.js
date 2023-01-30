@@ -48,32 +48,30 @@ console.log('The file will be read!');
 // SERVER
 //------------------------------//
 
+const dataJSON = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
+const productData = JSON.parse(dataJSON);
+
 const server = http.createServer((req, res) => {
   const pathName = req.url;
-
-  console.log(typeof req.url);
 
   if (pathName === '/' || pathName === '/overview') {
     res.writeHead(200, { 'Content-type': 'text/html' });
 
-    res.end(
-      `<p style="font-family: 'Amazon Ember', sans-serif;">This is the OVERVIEW!</p>`
-    );
+    res.end(`<p style="font-family: monospace">This is the OVERVIEW!</p>`);
   } else if (pathName === '/product') {
     res.writeHead(200, { 'Content-type': 'text/html' });
 
-    res.end(
-      `<p style="font-family: 'Amazon Ember', sans-serif;">This is the PRODUCT!</p>`
-    );
+    res.end(`<p style="font-family: monospace;">This is the PRODUCT!</p>`);
+  } else if (pathName === '/api') {
+    res.writeHead(200, { 'Content-type': 'application/json' });
+    res.end(dataJSON);
   } else {
     res.writeHead(404, {
       'Content-type': 'text/html',
       'my-own-header': 'hello-world',
     });
 
-    res.end(
-      `<p style="font-family: 'Amazon Ember', sans-serif;">404 PAGE NOT FOUND!</p>`
-    );
+    res.end(`<p style="font-family: monospace;">404 PAGE NOT FOUND!</p>`);
   }
 });
 
