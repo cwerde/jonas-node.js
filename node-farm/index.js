@@ -1,8 +1,8 @@
 const fs = require('fs');
 const http = require('http');
 const url = require('url');
-const { type } = require('os');
-const { CLIENT_RENEG_LIMIT } = require('tls');
+
+const replaceTemplate = require('./modules/replaceTemplate', 'utf-8');
 
 //------------------------------//
 // FILES
@@ -64,25 +64,6 @@ const tempProduct = fs.readFileSync(
 
 const dataJSON = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
 const dataObject = JSON.parse(dataJSON);
-
-const replaceTemplate = (template, product) => {
-  let output = template;
-
-  output = output.replace(/{%ID%}/g, product.id);
-  output = output.replace(/{%PRODUCT_NAME%}/g, product.productName);
-  output = output.replace(/{%IMAGE%}/g, product.image);
-  output = output.replace(/{%FROM%}/g, product.from);
-  output = output.replace(/{%NUTRIENTS%}/g, product.nutrients);
-  output = output.replace(/{%QUANTITY%}/g, product.quantity);
-  output = output.replace(/{%PRICE%}/g, product.price);
-  output = output.replace(/{%DESCRIPTION%}/g, product.description);
-
-  if (!product.organic) {
-    output = output.replace(/{%NOT_ORGANIC%}/g, 'not-organic');
-  }
-
-  return output;
-};
 
 const server = http.createServer((req, res) => {
   const { query, pathname } = url.parse(req.url);
