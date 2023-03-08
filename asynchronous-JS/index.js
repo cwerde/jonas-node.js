@@ -19,6 +19,8 @@ const writeFilePro = (file, data) => {
   });
 };
 
+// async - await
+
 const getDogPic = async () => {
   try {
     const data = await readFilePro(`${__dirname}/dog.txt`);
@@ -33,9 +35,36 @@ const getDogPic = async () => {
     console.log('Random dog image saved to a file!');
   } catch (error) {
     console.log(error);
+
+    throw error;
   }
+
+  return '2: READY 🐕';
 };
-getDogPic();
+
+(async () => {
+  try {
+    console.log('1: Will get dog pics!');
+    const dogPic = await getDogPic();
+    console.log(dogPic);
+    console.log('3: Done getting dog pics!');
+  } catch (error) {
+    console.log('💥 ERROR 💥');
+  }
+})();
+
+/*
+console.log('1: Will get dog pics!');
+
+getDogPic()
+  .then((data) => {
+    console.log(data);
+    console.log('3: Done getting dog pics!');
+  })
+  .catch((error) => {
+    console.log('💥 ERROR 💥');
+  });
+*/
 
 // Promises
 /*
