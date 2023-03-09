@@ -1,6 +1,7 @@
 const fs = require('fs');
 const express = require('express');
 const { request } = require('http');
+const { response } = require('express');
 
 const app = express();
 
@@ -56,6 +57,16 @@ app.post('/api/v1/tours', (request, response) => {
       response.status(201).json({ status: 'success', tour: newTour });
     }
   );
+});
+
+app.patch('/api/v1/tours/:id', (request, response) => {
+  if (request.params.id * 1 > tours.length) {
+    return response.status(404).json({ status: 'fail', message: 'Invalid ID' });
+  }
+
+  response
+    .status(200)
+    .json({ status: 'success', data: { tour: '<Updated tour here...>' } });
 });
 
 const port = 3000;
