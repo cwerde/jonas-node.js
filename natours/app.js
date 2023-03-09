@@ -28,6 +28,19 @@ app.get('/api/v1/tours', (request, response) => {
     .json({ status: 'success', result: tours.length, data: { tours: tours } });
 });
 
+app.get('/api/v1/tours/:id', (request, response) => {
+  console.log(request.params);
+  const id = request.params.id * 1;
+  const tour = tours.find((x) => x.id === id);
+
+  // if (id > tours.length)
+  if (!tour) {
+    return response.status(404).json({ status: 'fail', message: 'Invalid ID' });
+  }
+
+  response.status(200).json({ status: 'success', data: { tour } });
+});
+
 app.post('/api/v1/tours', (request, response) => {
   // console.log(request.body);
 
