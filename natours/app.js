@@ -1,7 +1,10 @@
 const fs = require('fs');
 const express = require('express');
+const { request } = require('http');
 
 const app = express();
+
+app.use(express.json());
 
 /*
 app.get('/', (request, response) => {
@@ -23,6 +26,23 @@ app.get('/api/v1/tours', (request, response) => {
   response
     .status(200)
     .json({ status: 'success', result: tours.length, data: { tours: tours } });
+});
+
+app.post('/api/v1/tours', (request, response) => {
+  // console.log(request.body);
+
+  const newId = tours[tours.length - 1].id + 1;
+  const newTour = Object.assign({ id: newId }, request.body);
+
+  tours.push(newTour);
+
+  fs.writeFile(
+    `${__dirname}/dev-data/data/tours-simple.json`,
+    JSON.stringify(tours),
+    (err) => {
+      response.status(201).json({ status: 'success', tour: newTour });
+    }
+  );
 });
 
 const port = 3000;
