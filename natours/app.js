@@ -14,6 +14,8 @@ app.use(morgan('dev'));
 
 app.use(express.json());
 
+app.use(express.static(`${__dirname}/public`));
+
 app.use((request, response, next) => {
   console.log('Hello from the middleware 👋');
   next();
