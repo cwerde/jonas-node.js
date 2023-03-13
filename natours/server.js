@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+
 dotenv.config({ path: `./config.env`, encoding: 'utf-8' });
 
 const app = require('./app');
